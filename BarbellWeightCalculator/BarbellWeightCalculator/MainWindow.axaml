@@ -2,8 +2,105 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="242" d:DesignHeight="510"
         x:Class="BarbellWeightCalculator.MainWindow"
-        Title="BarbellWeightCalculator">
-    Welcome to Avalonia!
+        Title="BarbellWeightCalculator"
+		Width="242" Height="510">
+
+	<!-- Entire screen -->
+	<DockPanel LastChildFill="True" Background="DimGray">
+		
+		<!-- Weights section (target and bar) -->
+		<Border Background="Gainsboro" BorderBrush="Black" BorderThickness="2"
+				CornerRadius="3" Padding="10" Margin="8 8 8 0" DockPanel.Dock="Top">
+			<StackPanel>
+				<Grid ColumnDefinitions="Auto, *" RowDefinitions="Auto, Auto, Auto">
+					<Label Padding="0 6 10 0" HorizontalAlignment="Right">Target weight</Label>
+					<TextBox Grid.Column="1" TextAlignment="Right"></TextBox>
+					<Label Padding="0 6 10 0" HorizontalAlignment="Right" Grid.Row="1">Bar weight</Label>
+					<TextBox Grid.Row="1" Grid.Column="1" TextAlignment="Right"></TextBox>
+				</Grid>
+				<DockPanel Margin="0 30 0 0">
+					<Button DockPanel.Dock="Right">
+						<Label>
+							calculate
+						</Label>
+					</Button>
+					<ComboBox Margin="0 3 0 0" DockPanel.Dock="Right" SelectedIndex="0">
+						<ComboBoxItem>kg</ComboBoxItem>
+						<ComboBoxItem>lb</ComboBoxItem>
+					</ComboBox>
+				</DockPanel>
+			</StackPanel>
+		</Border>
+		
+		<!-- Results section -->
+		<Border Background="Gainsboro" BorderBrush="Black" BorderThickness="2"
+				CornerRadius="3" Padding="10" Margin="8 8 8 8" DockPanel.Dock="Bottom"
+				Height="110">
+			<TextBlock TextWrapping="Wrap">
+				You can make 100kg by adding 2 x 20kg plates on each side of the 20kg bar.
+			</TextBlock>
+		</Border>
+		
+		<!-- Plates configuration -->
+		<Border Background="Gainsboro" BorderBrush="Black" BorderThickness="2"
+				CornerRadius="3" Padding="10" Margin="8 8 8 0">
+			<DockPanel LastChildFill="True">
+				<!-- Header -->
+				<DockPanel DockPanel.Dock="Top">
+					<Label>Weight</Label>
+					<Label DockPanel.Dock="Right" HorizontalAlignment="Right">
+						Quantity
+					</Label>
+				</DockPanel>
+				
+				<!-- Add new weight -->
+				<DockPanel DockPanel.Dock="Bottom">
+					<Button DockPanel.Dock="Right" HorizontalAlignment="Right" >add</Button>
+					<TextBox DockPanel.Dock="Right" HorizontalAlignment="Right"
+							 TextAlignment="Right" Margin="0 0 4 0"></TextBox>
+				</DockPanel>
+
+				<!-- Existing weights -->
+				<Border Background="Gainsboro" BorderBrush="Black" BorderThickness="2"
+						CornerRadius="3" Margin="0 0 0 3">
+					<ScrollViewer>
+
+						<ItemsControl>
+							<ItemsControl.ItemTemplate>
+								<DataTemplate>
+									<DockPanel>
+										<Label></Label>
+										<StackPanel DockPanel.Dock="Right"
+													Orientation="Horizontal">
+											<TextBox>
+												
+											</TextBox>
+											<Button>
+												+
+											</Button>
+											<Button>
+												-
+											</Button>
+											<Button>
+												x
+											</Button>	
+										
+										</StackPanel>
+									</DockPanel>
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+
+						</ItemsControl>
+					</ScrollViewer>
+				</Border>
+				
+				
+			</DockPanel>
+		</Border>
+		
+		
+	</DockPanel>
+	
 </Window>
