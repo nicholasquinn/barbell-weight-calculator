@@ -29,7 +29,7 @@ A user must be able to:
 
 The UI should look something like this (it's gorgeous, right?):
 
-![ui-mock](images/ui-mock.png)
+![ui-mock](images/ui-mock.PNG)
 
 
 
