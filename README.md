@@ -12,6 +12,7 @@ It is intended to be a basic application that features:
 * Manual MVVM implementation rather than using a framework (Reactive UI or Microsoft Community Toolkit)
   * Manually implementing MVVM will be more boilerplate, but requires a more intimate understanding of the pattern.
 * Simple unit testing using XUnit
+* Data persistence/storage via JSON files written to disk (using a database would be overkill for an app of this size)
 
 
 
