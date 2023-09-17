@@ -9,9 +9,10 @@ The purpose of this app is to practice C# development, specifically using the Av
 
 It is intended to be a basic application that features:
 
-* Manual MVVM implementation rather than using a framework (Reactive UI or Microsoft Community Toolkit)
-  * Manually implementing MVVM will be more boilerplate, but requires a more intimate understanding of the pattern.
-* Simple unit testing using XUnit
+* Manual Model-View-ViewModel (MVVM) implementation rather than using a framework (Reactive UI or Microsoft Community Toolkit)
+  * Manually implementing MVVM will be more boilerplate, but requires a more intimate understanding of the pattern
+* Simple unit testing using a plain old C# console application, rather than a framework
+  * Again, the point is to test an understanding of basic concepts, which are not specific to any framework
 * Data persistence/storage via JSON files written to disk (using a database would be overkill for an app of this size)
 
 
@@ -25,7 +26,7 @@ A user must be able to:
 * Set a target weight
 * Set the weight of the barbell, since there are different sizes (Olympic, trap bar, etc.)
 * Set the weight unit i.e. kg or lbs. This doesn't effect the calculation, it's purely for display purposes
-* Set which weight plates they have available, including adding weights, removing weights, and setting the quantity available for each weight
+* Set which weight plates they have available, including adding plates, removing plates, and setting the quantity available of each plate
 * See the result i.e. how they should load up the barbell OR a message displaying it's impossible if their current weight set cannot achieve it
 
 The UI should look something like this (it's gorgeous, right?):
