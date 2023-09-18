@@ -1,5 +1,6 @@
 ﻿
 using BarbellWeightCalculator;
+using Metsys.Bson;
 using System.Diagnostics;
 
 // define the tests...
@@ -113,6 +114,53 @@ List<Test> tests = new List<Test> {
         var plateSet = weightConfiguration.CalculatePlateSet();
         return plateSet.Count == 0;
     }),
+
+    new Test("PersistenceService_ReadWeightConfiguration_NoExistingFile", () =>
+    {
+        Test.Helpers.DeleteFile(Test.Helpers.FullFilePath);
+        var persistenceService 
+            = new PersistenceService(Test.Helpers.TestFilePath, Test.Helpers.TestFileName);
+        WeightConfiguration weightConfiguration = persistenceService.ReadWeightConfiguration();
+        return
+            weightConfiguration.TargetWeight == 0 &&
+            weightConfiguration.BarbellWeight == 0 &&
+            weightConfiguration.IsMetric &&
+            weightConfiguration.PlatesPerSide.Count == 0;
+    }),
+
+    new Test("PersistenceService_WriteWeightConfiguration_NoExistingFile", () =>
+    {
+        Test.Helpers.DeleteFile(Test.Helpers.FullFilePath);
+
+        var persistenceService
+            = new PersistenceService(Test.Helpers.TestFilePath, Test.Helpers.TestFileName);
+
+        WeightConfiguration weightConfiguration
+            = new ( WeightConfiguration.MaxTargetWeight,20,true, Test.Helpers.FullWeightSet);
+        return persistenceService.WriteWeightConfiguration(weightConfiguration);
+    }),
+
+    new Test("PersistenceService_ReadWeightConfiguration_ExistingFile", () =>
+    {
+        var persistenceService
+            = new PersistenceService(Test.Helpers.TestFilePath, Test.Helpers.TestFileName);
+        WeightConfiguration weightConfiguration = persistenceService.ReadWeightConfiguration();
+        return // values from above write test case
+            weightConfiguration.TargetWeight == WeightConfiguration.MaxTargetWeight &&
+            weightConfiguration.BarbellWeight == 20 &&
+            weightConfiguration.IsMetric &&
+            weightConfiguration.PlatesPerSide.SequenceEqual(Test.Helpers.FullWeightSet);
+    }),
+
+    new Test("PersistenceService_WriteWeightConfiguration_ExistingFile", () =>
+    {
+        var persistenceService
+            = new PersistenceService(Test.Helpers.TestFilePath, Test.Helpers.TestFileName);
+
+        WeightConfiguration weightConfiguration
+            = new ( WeightConfiguration.MaxTargetWeight,20,true, Test.Helpers.FullWeightSet);
+        return persistenceService.WriteWeightConfiguration(weightConfiguration);
+    }),
 };
 
 // then run the tests!
@@ -174,5 +222,19 @@ class Test
                     { 25, 2 }, { 20, 10 }, { 15, 10 }, { 10, 2 }, { 5, 2 },
                     { 2.5, 2 }, { 2, 2 }, { 1.5, 2 }, { 1, 2 }, { .5, 2 }
                 };
+
+        public static string TestFilePath => Environment.GetFolderPath(
+            Environment.SpecialFolder.ApplicationData);
+
+        public static string TestFileName => "barbell-weight-calculator-test-data.json";
+
+        public static string FullFilePath => Path.Combine(TestFilePath, TestFileName);
+
+        public static void DeleteFile(string filePath)
+        {
+            // don't care if this has an exception, will manually fix
+            if (File.Exists(filePath)) File.Delete(filePath);
+        }
+
     }
 }
