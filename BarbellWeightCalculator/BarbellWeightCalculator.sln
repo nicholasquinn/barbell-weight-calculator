@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarbellWeightCalculator", "BarbellWeightCalculator\BarbellWeightCalculator.csproj", "{9503DC47-636E-452E-A062-D0DFD8946657}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{7449A3BD-C5D2-42ED-BBEE-EAAE70A00C15}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9503DC47-636E-452E-A062-D0DFD8946657} = {9503DC47-636E-452E-A062-D0DFD8946657}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
