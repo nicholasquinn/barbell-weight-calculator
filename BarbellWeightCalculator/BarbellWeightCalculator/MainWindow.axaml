@@ -2,10 +2,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:bwc="clr-namespace:BarbellWeightCalculator"
         mc:Ignorable="d" d:DesignWidth="242" d:DesignHeight="510"
         x:Class="BarbellWeightCalculator.MainWindow"
         Title="BarbellWeightCalculator"
-		Width="242" Height="510">
+		Width="242" Height="510"
+		x:DataType="bwc:MainWindowViewModel">
 
 	<!-- Entire screen -->
 	<DockPanel LastChildFill="True" Background="DimGray">
@@ -38,9 +40,7 @@
 		<Border Background="Gainsboro" BorderBrush="Black" BorderThickness="2"
 				CornerRadius="3" Padding="10" Margin="8 8 8 8" DockPanel.Dock="Bottom"
 				Height="110">
-			<TextBlock TextWrapping="Wrap">
-				You can make 100kg by adding 2 x 20kg plates on each side of the 20kg bar.
-			</TextBlock>
+			<TextBlock Text="{Binding ResultText}" TextWrapping="Wrap"> </TextBlock>
 		</Border>
 		
 		<!-- Plates configuration -->
