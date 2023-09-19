@@ -40,7 +40,7 @@ List<Test> tests = new List<Test> {
     {
         WeightConfiguration weightConfiguration
             = new (20,20,true, Test.Helpers.FullWeightSet);
-        return weightConfiguration.CalculatePlateSet().Count == 0;
+        return weightConfiguration.TryCalculatePlateSet(out var plateSet);
     }),
 
     new Test("WeightConfiguration_CalculateWeightSet_SinglePlate", () => 
@@ -50,7 +50,7 @@ List<Test> tests = new List<Test> {
         // Expect to use a single 25kg plate since we have a target weight of 70kg
         // and the bar is 20kg, hence we need 70-20=50kg of plates, therefore 25kg
         // per side, and we have 25kg plates, so should use that one plate per side.
-        var plateSet = weightConfiguration.CalculatePlateSet();
+        weightConfiguration.TryCalculatePlateSet(out var plateSet);
         plateSet.TryGetValue(25, out uint twentyFiveCount);
         return plateSet.Count == 1 && twentyFiveCount == 1;
     }),
@@ -62,7 +62,7 @@ List<Test> tests = new List<Test> {
         // Expect to use 1x 25kg + 1x 20kg since we have a target weight of 110kg
         // and the bar is 20kg, hence we need 110-20=90kg of plates, therefore 45kg
         // per side, and we have 25kg and 20kg plates, so should use one per side.
-        var plateSet = weightConfiguration.CalculatePlateSet();
+        weightConfiguration.TryCalculatePlateSet(out var plateSet);
         plateSet.TryGetValue(25, out uint twentyFiveCount);
         plateSet.TryGetValue(20, out uint twentyCount);
         return plateSet.Count == 2 && twentyFiveCount == 1 && twentyCount == 1;
@@ -76,7 +76,7 @@ List<Test> tests = new List<Test> {
         // and the bar is 20kg, hence we need 100-20=80kg of plates, therefore 40kg
         // per side, and we have 25kg and 15kg plates, so should use one per side.
         // Note that the 20kg plate will be skipped.
-        var plateSet = weightConfiguration.CalculatePlateSet();
+        weightConfiguration.TryCalculatePlateSet(out var plateSet);
         plateSet.TryGetValue(25, out uint twentyFiveCount);
         plateSet.TryGetValue(15, out uint fifteenCount);
         return plateSet.Count == 2 && twentyFiveCount == 1 && fifteenCount == 1;
@@ -90,7 +90,7 @@ List<Test> tests = new List<Test> {
         // and the bar is 20kg, hence we need 100-20=80kg of plates, therefore 40kg
         // per side, and we have 25kg and 15kg plates, so should use one per side.
         // Note that the 20kg plate will be skipped.
-        var plateSet = weightConfiguration.CalculatePlateSet();
+        weightConfiguration.TryCalculatePlateSet(out var plateSet);
         plateSet.TryGetValue(25, out uint twentyFiveCount);
         plateSet.TryGetValue(15, out uint fifteenCount);
         return plateSet.Count == 2 && twentyFiveCount == 1 && fifteenCount == 1;
@@ -102,7 +102,7 @@ List<Test> tests = new List<Test> {
             = new (100.125,20,true, Test.Helpers.FullWeightSet);
         // We don't have any .125 plates, so impossible to make this weight even
         // though we can make weights higher than this amount
-        var plateSet = weightConfiguration.CalculatePlateSet();
+        weightConfiguration.TryCalculatePlateSet(out var plateSet);
         return plateSet.Count == 0;
     }),
 
@@ -111,7 +111,7 @@ List<Test> tests = new List<Test> {
         WeightConfiguration weightConfiguration
             = new ( WeightConfiguration.MaxTargetWeight,20,true, Test.Helpers.FullWeightSet);
         // We cannot reach this value
-        var plateSet = weightConfiguration.CalculatePlateSet();
+        weightConfiguration.TryCalculatePlateSet(out var plateSet);
         return plateSet.Count == 0;
     }),
 

@@ -128,24 +128,28 @@ namespace BarbellWeightCalculator
         /// ways to achieve the target weight, but they use the same amount or more plates.
         /// </summary>
         /// <returns></returns>
-        public Dictionary<double, uint> CalculatePlateSet()
+        public bool TryCalculatePlateSet(out SortedDictionary<double, uint> plateSet)
         {
+            plateSet = new SortedDictionary<double, uint>();
+
+            double remainingWeight = CalculateSingleSidePlateWeight();
+
+            if (remainingWeight < 0) return false;
+            else if (remainingWeight == 0) return true;
+
             // get flat array of weight plates i.e. dictionary of 25kg -> 2, 10kg -> 1
             // would become 25, 25, 10
             double[] plates = PlatesPerSide.Reverse().SelectMany(
                 pair => Enumerable.Repeat(pair.Key, (int)pair.Value)).ToArray();
 
-            double remainingWeight = CalculateSingleSidePlateWeight();
-
             var answer = FindMinimumWeights(plates, remainingWeight);
-
-            var plateSet = new Dictionary<double, uint>();
+            
             foreach (double plate in answer)
             {
                 plateSet.TryGetValue(plate, out uint plateCount);
                 plateSet[plate] = plateCount + 1;
             }
-            return plateSet;
+            return plateSet.Count != 0;
         }
 
     }
