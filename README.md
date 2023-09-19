@@ -11,7 +11,7 @@ It is intended to be a basic application that features:
 
 * **Manual Model-View-ViewModel (MVVM) implementation** rather than using a framework (Reactive UI or Microsoft Community Toolkit)
   * Manually implementing MVVM will be more boilerplate, but requires a more intimate understanding of the pattern
-* Simple **unit testing** using a plain old C# console application, rather than a framework
+* Simple **unit testing** using a plain old C# console application (separate project), rather than a framework
   * Again, the point is to test an understanding of basic concepts, which are not specific to any framework
 * Data persistence/storage via JSON files written to disk (using a database would be overkill for an app of this size)
 
@@ -29,7 +29,7 @@ A user must be able to:
 * Set which weight plates they have available, including adding plates, removing plates, and setting the quantity available of each plate
 * See the result i.e. how they should load up the barbell OR a message displaying it's impossible if their current weight set cannot achieve it
 
-The UI should look something like this (it's gorgeous, right?):
+The UI should look something like this (it's gorgeous, right? All jokes aside, **it's not supposed to look good**, this is just a proof of concept app and **the code is the focus**):
 
 ![ui-mock](images/ui-mock.PNG)
 
