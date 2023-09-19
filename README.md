@@ -5,13 +5,13 @@ A simple app for calculating which weight plates to put on a barbell to achieve 
 
 # Motivation
 
-The purpose of this app is to practice C# development, specifically using the Avalonia UI framework.
+The purpose of this app is to **practice C# development**, specifically using the Avalonia UI framework.
 
 It is intended to be a basic application that features:
 
-* Manual Model-View-ViewModel (MVVM) implementation rather than using a framework (Reactive UI or Microsoft Community Toolkit)
+* **Manual Model-View-ViewModel (MVVM) implementation** rather than using a framework (Reactive UI or Microsoft Community Toolkit)
   * Manually implementing MVVM will be more boilerplate, but requires a more intimate understanding of the pattern
-* Simple unit testing using a plain old C# console application, rather than a framework
+* Simple **unit testing** using a plain old C# console application, rather than a framework
   * Again, the point is to test an understanding of basic concepts, which are not specific to any framework
 * Data persistence/storage via JSON files written to disk (using a database would be overkill for an app of this size)
 
@@ -37,4 +37,6 @@ The UI should look something like this (it's gorgeous, right?):
 
 # Finished Product
 
-TODO: add screenshots of the final app here once it is done. Perhaps even embed a gif showing a demonstration of all app features.
+TODO: embed a gif showing a demonstration of all app features.
+
+![ui-mock](images/ui-real.PNG)
